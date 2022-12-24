@@ -7,8 +7,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.material.icons.rounded.*
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -47,17 +46,19 @@ class MainActivity : ComponentActivity() {
 fun BussinessCardApp() {
     Column(
         Modifier
+            .fillMaxSize()
             .background(Color(0xFF073042))
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceAround
+        verticalArrangement = Arrangement.Center
     ) {
         ComposableImageCard(
             name = "Yuda Aditya",
             title = "UX Designer",
             image = painterResource(id = R.drawable.android_logo)
         )
-        ComposableContactCard(phoneNumber = "3249879812", socialMedia = "90380289", email = "yudauad")
+        Spacer(modifier = Modifier.height(160.dp))
+        ComposableContactCard(phoneNumber = "3249879812", socialMedia = "@yuda_aditya11", email = "yudauad@mail.com")
     }
 }
 
@@ -76,7 +77,7 @@ private fun ComposableImageCard(
         Image(
             painter = image,
             contentDescription = null,
-            modifier = Modifier
+            modifier
                 .padding(bottom = 4.dp)
                 .height(100.dp)
                 .width(100.dp)
@@ -104,8 +105,8 @@ private fun ComposableContactCard(
 ) {
     val MyAppIcons = Icons.Rounded
     Column(
-        modifier.padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+//        modifier.padding(16.dp),
+        horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.Bottom
     ) {
         Row(
@@ -116,7 +117,7 @@ private fun ComposableContactCard(
 
         ) {
             Icon(
-                Icons.Rounded.Menu,
+                Icons.Rounded.Phone,
                 contentDescription = "Localized description",
                 tint = Color(0xFF3ddc84)
             )
@@ -132,15 +133,14 @@ private fun ComposableContactCard(
                 .padding(8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-
         ) {
             Icon(
-                Icons.Rounded.Menu,
+                Icons.Rounded.Share,
                 contentDescription = "Localized description",
-                tint = Color(0xFF3ddc84)
+                tint = Color(0xFF3ddc84),
             )
             Text(
-                text = phoneNumber,
+                text = socialMedia,
                 color = Color.White,
                 textAlign = TextAlign.End,
                 modifier = Modifier.padding(start = 16.dp)
@@ -154,12 +154,12 @@ private fun ComposableContactCard(
 
         ) {
             Icon(
-                Icons.Rounded.Menu,
+                Icons.Rounded.Email,
                 contentDescription = "Localized description",
                 tint = Color(0xFF3ddc84)
             )
             Text(
-                text = phoneNumber,
+                text = email,
                 color = Color.White,
                 textAlign = TextAlign.End,
                 modifier = Modifier.padding(start = 16.dp)
