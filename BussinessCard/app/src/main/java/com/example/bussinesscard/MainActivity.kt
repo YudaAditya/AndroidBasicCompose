@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bussinesscard.ui.theme.BussinessCardTheme
+import kotlin.math.min
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -176,4 +177,18 @@ fun DefaultPreview() {
     BussinessCardTheme {
         BussinessCardApp()
     }
+}
+
+
+fun main() {
+    val winningBid = Bid(5000, "Private Collector")
+
+    println("Item A is sold at ${auctionPrice(winningBid, 2000)}.")
+    println("Item B is sold at ${auctionPrice(null, 3000)}.")
+}
+
+class Bid(val amount: Int, val bidder: String)
+
+fun auctionPrice(bid: Bid?, minimumPrice: Int): Int {
+    return bid?.amount ?: minimumPrice
 }
