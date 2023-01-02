@@ -12,7 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,7 +45,7 @@ fun LemonTextAndImage(
     textLabelResourceId: Int,
     drawableResourceId: Int,
     contentDescriptionResourceId: Int,
-//    onImageClick:()-> Unit,
+    onImageClick:()-> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -62,9 +62,9 @@ fun LemonTextAndImage(
             contentDescription = stringResource(id = contentDescriptionResourceId),
             modifier = Modifier
                 .wrapContentSize()
-//                .clickable(
-//                    onClick = onImageClick
-//                )
+                .clickable(
+                    onClick = onImageClick
+                )
                 .border(
                     BorderStroke(2.dp, Color(105, 205, 216)),
                     shape = RoundedCornerShape(4.dp)
@@ -76,12 +76,61 @@ fun LemonTextAndImage(
 
 @Composable
 fun LemonadeApp() {
-    LemonTextAndImage(
-        textLabelResourceId = R.string.lemon_tree,
-        drawableResourceId = R.drawable.lemon_tree,
-        contentDescriptionResourceId = R.string.lemon_tree_description,
-//        onImageClick =
-    )
+    var currentStep by remember { mutableStateOf(1) }
+
+    var squeezeCount by remember {
+        mutableStateOf(0)
+    }
+
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background
+    ){
+        when (currentStep) {
+            1 -> {
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.lemon_tree,
+                    drawableResourceId = R.drawable.lemon_tree,
+                    contentDescriptionResourceId = R.string.lemon_tree_description,
+                    onImageClick = {
+                        currentStep = 2
+                        squeezeCount = (2..4).random()
+                    }
+                )
+            }
+            2 -> {
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.lemon,
+                    drawableResourceId = R.drawable.lemon_squeeze,
+                    contentDescriptionResourceId = R.string.squeeze_description,
+                    onImageClick = {
+                        squeezeCount--
+
+                        if (squeezeCount == 0) {
+                            currentStep = 3
+                        }
+                    })
+            }
+            3 -> {
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.glass_lemonade,
+                    drawableResourceId = R.drawable.lemon_drink,
+                    contentDescriptionResourceId = R.string.drink_description,
+                    onImageClick = {
+                        currentStep = 4
+                    })
+            }
+            4 -> {
+                LemonTextAndImage(
+                    textLabelResourceId = R.string.empty_glass,
+                    drawableResourceId = R.drawable.lemon_restart,
+                    contentDescriptionResourceId = R.string.empty_description,
+                    onImageClick = { currentStep= 1 })
+            }
+        }
+    }
+
+
 }
 
 @Preview(showBackground = true)
