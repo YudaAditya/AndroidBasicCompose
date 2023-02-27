@@ -62,7 +62,7 @@ fun TipTimeScreen() {
         Text(
             text = stringResource(R.string.calculate_tip),
             fontSize = 24.sp,
-            modifier = Modifier.align(androidx.compose.ui.Alignment.CenterHorizontally)
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(Modifier.height(16.dp))
 
