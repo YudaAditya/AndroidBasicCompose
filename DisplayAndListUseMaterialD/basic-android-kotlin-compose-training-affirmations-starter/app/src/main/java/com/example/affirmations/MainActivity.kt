@@ -54,7 +54,6 @@ fun AffirmationApp() {
         AffirmationList(affirmationList = Datasource().loadAffirmations())
     }
 }
-
 @Composable
 fun AffirmationCard(affirmation: Affirmation, modifier: Modifier = Modifier) {
     Card(modifier = Modifier.padding(8.dp), elevation = 4.dp) {
