@@ -181,9 +181,7 @@ var currentArt by remember{ mutableStateOf(1) }
                 }
             }
         }
-
-
-
+        
 
         Surface(
             modifier = Modifier.fillMaxWidth()
