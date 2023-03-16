@@ -43,10 +43,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -61,6 +61,8 @@ import androidx.core.content.ContextCompat.startActivity
 import com.example.dessertclicker.data.Datasource.dessertList
 import com.example.dessertclicker.ui.theme.DessertClickerTheme
 import com.example.dessertclicker.model.Dessert
+
+// tag for logging
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
@@ -70,10 +72,14 @@ class MainActivity : ComponentActivity() {
         Log.d(TAG, "onCreate Called")
         setContent {
             DessertClickerTheme {
-
                 DessertClickerApp(desserts = dessertList)
             }
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart Called")
     }
 
     override fun onResume() {
@@ -156,15 +162,15 @@ private fun DessertClickerApp(
     desserts: List<Dessert>
 ) {
 
-    var revenue by remember { mutableStateOf(0) }
-    var dessertsSold by remember { mutableStateOf(0) }
+    var revenue by rememberSaveable { mutableStateOf(0) }
+    var dessertsSold by rememberSaveable { mutableStateOf(0) }
 
-    val currentDessertIndex by remember { mutableStateOf(0) }
+    val currentDessertIndex by rememberSaveable { mutableStateOf(0) }
 
-    var currentDessertPrice by remember {
+    var currentDessertPrice by rememberSaveable {
         mutableStateOf(desserts[currentDessertIndex].price)
     }
-    var currentDessertImageId by remember {
+    var currentDessertImageId by rememberSaveable {
         mutableStateOf(desserts[currentDessertIndex].imageId)
     }
 
