@@ -82,7 +82,8 @@ fun CupcakeAppBar(
 @Composable
 fun CupcakeApp(
     modifier: Modifier = Modifier,
-    viewModel: OrderViewModel = viewModel()
+    viewModel: OrderViewModel = viewModel(),
+    navController: NavHostController = rememberNavController()
 ) {
     val navController = rememberNavController()
 
