@@ -34,24 +34,21 @@ fun ReplyApp(
     windowSize: WindowWidthSizeClass,
     modifier: Modifier = Modifier
 ) {
-
-    val viewModel: ReplyViewModel = viewModel()
     val navigationType: ReplyNavigationType
+    val viewModel: ReplyViewModel = viewModel()
     val replyUiState = viewModel.uiState.collectAsState().value
-
+    
     when (windowSize) {
-        WindowWidthSizeClass.Compact ->{
+        WindowWidthSizeClass.Compact -> {
             navigationType = ReplyNavigationType.BOTTOM_NAVIGATION
         }
-
-        WindowWidthSizeClass.Medium ->{
+        WindowWidthSizeClass.Medium -> {
             navigationType = ReplyNavigationType.NAVIGATION_RAIL
         }
-
-        WindowWidthSizeClass.Expanded ->{
+        WindowWidthSizeClass.Expanded -> {
             navigationType = ReplyNavigationType.PERMANENT_NAVIGATION_DRAWER
         }
-        else ->{
+        else -> {
             navigationType = ReplyNavigationType.BOTTOM_NAVIGATION
         }
     }
